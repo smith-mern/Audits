@@ -153,10 +153,13 @@ collateralForRepayment = (200 \* 50) / 110 = 90.9 ETH
 # Recommendation
 
 1. Modify the collateral calculation formula to use the current debt from the protocol
-   `
-   // Get current debt from the protocol
-   uint256 currentDebtWithInterest = morpho.expectedBorrowAssets(marketParams, msg.sender);
-   // Calculate collateral proportionally to current debt
-   uint256 collateralForRepayment = (totalCollateralsPerUser[pairKey][msg.sender] \* debtToClose) / currentDebtWithInterest;
 
-` 2. Alternatively, implement a mechanism to periodically sync the internal position tracking with the actual protocol state to account for accrued interest.
+`
+// Get current debt from the protocol
+uint256 currentDebtWithInterest = morpho.expectedBorrowAssets(marketParams, msg.sender);
+// Calculate collateral proportionally to current debt
+uint256 collateralForRepayment = (totalCollateralsPerUser[pairKey][msg.sender] \* debtToClose) / currentDebtWithInterest;
+
+`
+
+2. Alternatively, implement a mechanism to periodically sync the internal position tracking with the actual protocol state to account for accrued interest.

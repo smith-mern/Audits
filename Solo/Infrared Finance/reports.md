@@ -1,4 +1,4 @@
-# Delisted reward tokens can still earn incentives through addIncentives because of inadequate validation
+# Delisted reward tokens can still earn incentives through addIncentives because of inadequate validation - Meduim
 
 # Summary
 
@@ -57,3 +57,39 @@ uint256 rewardsDuration = 7 days;
 
 1. Add a whitelist check in addIncentives function before moving forward with token reward processing
 2. Add a pause mechanism in case of emergencies
+
+# Inflexible Token Limit Leads to Tokens Locked in Reward System - Low
+
+# Summary
+
+The InfraredVault contract has a strict cap of 10 reward tokens (MAX_NUM_REWARD_TOKENS) for each vault. When this cap is hit, no additional reward tokens can be added or taken away, which effectively locks the reward system in its existing state. This limitation hinders the protocol's ability to adjust to new reward strategies or token integrations without the need to deploy new vaults.
+
+# Finding Description
+
+In InfraredVault.sol, there is a limitation relating reward token management that could result in token being stuck within the protocol. The contract has a constant called MAX_NUM_REWARD_TOKENS set to 10, and once this cap is reached, there is no way to remove or replace the existing reward tokens.
+
+there is no mechanism to remove reward tokens .Since tokens can only be added until the maximum is reached, and there is no removal option, once the limit is hit, the protocol loses all ability to adapt to new needs or changes in tokens.
+
+`
+function addReward(address \_rewardsToken, uint256 \_rewardsDuration)
+external
+onlyInfrared
+{
+if (\_rewardsToken == address(0)) revert Errors.ZeroAddress();
+if (\_rewardsDuration == 0) revert Errors.ZeroAmount();
+if (rewardTokens.length == MAX_NUM_REWARD_TOKENS) {
+revert Errors.MaxNumberOfRewards();
+}
+\_addReward(\_rewardsToken, infrared, \_rewardsDuration);
+}
+
+`
+
+# Impact Explanation
+
+1. if a reward token is added but later becomes an issue the protocol is stuck with it since there's no removal mechanism.
+2. unusable tokens take up storage space and resourses since they are part of the reward token
+
+# Recommendation
+
+1. Add a method to remove reward tokens

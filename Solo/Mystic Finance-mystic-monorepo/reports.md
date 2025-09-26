@@ -119,22 +119,34 @@ the logs from the test contract trace
 
 `
 Logs:
+
 Initial borrows: 100 ETH
+
 Initial collateral: 200 ETH
+
 Interest accrued: 10 ETH
+
 Current borrows with interest: 110 ETH
+
 Debt to close (50%): 50 ETH
+
 Bundler withdrawn collateral: 100 ETH
+
 Correct withdrawn collateral: 90 ETH
+
 Excess collateral withdrawn: 9 ETH
 
 Demonstrating bundler calculation:
-collateralForRepayment = (totalCollateralsPerUser _ debtToClose) / totalBorrowsPerUser
-collateralForRepayment = (200 _ 50) / 100 = 100 ETH
+
+collateralForRepayment = (totalCollateralsPerUser \* debtToClose) / totalBorrowsPerUser
+
+collateralForRepayment = (200 \* 50) / 100 = 100 ETH
 
 Correct calculation with interest:
-collateralForRepayment = (totalCollateralsPerUser _ debtToClose) / currentBorrowsWithInterest
-collateralForRepayment = (200 _ 50) / 110 = 90.9 ETH
+
+collateralForRepayment = (totalCollateralsPerUser \* debtToClose) / currentBorrowsWithInterest
+
+collateralForRepayment = (200 \* 50) / 110 = 90.9 ETH
 
 `
 

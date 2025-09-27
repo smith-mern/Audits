@@ -1,4 +1,4 @@
-# Delisted reward tokens can still earn incentives through addIncentives because of inadequate validation - Meduim
+# 1. Delisted reward tokens can still earn incentives through addIncentives because of inadequate validation - Meduim
 
 # Summary
 
@@ -58,7 +58,7 @@ uint256 rewardsDuration = 7 days;
 1. Add a whitelist check in addIncentives function before moving forward with token reward processing
 2. Add a pause mechanism in case of emergencies
 
-# Inflexible Token Limit Leads to Tokens Locked in Reward System - Low
+# 2. Inflexible Token Limit Leads to Tokens Locked in Reward System - Low
 
 # Summary
 
